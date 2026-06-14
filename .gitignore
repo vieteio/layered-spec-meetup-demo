@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.specstory/
+
+# Generated skillpack installs (see scripts/install_skillpack.py)
+.cursor/
+.claude/
+.agents/
+.github/
+
+.next/
+node_modules/
