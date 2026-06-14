@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String        @id @default(cuid())
+  googleSub  String        @unique @map("google_sub")
+  email      String
+  name       String?
+  avatarUrl  String?       @map("avatar_url")
+  createdAt  DateTime      @default(now()) @map("created_at")
+  updatedAt  DateTime      @updatedAt @map("updated_at")
+  sessions   UserSession[]
+  documents  Document[]
+
+  @@map("users")
+}
+
+model UserSession {
+  id               String   @id @default(cuid())
+  userId           String   @map("user_id")
+  sessionTokenHash String   @unique @map("session_token_hash")
+  expiresAt        DateTime @map("expires_at")
+  lastSeenAt       DateTime @map("last_seen_at")
+  createdAt        DateTime @default(now()) @map("created_at")
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("user_sessions")
+}
+
+model Document {
+  id                     String                 @id @default(cuid())
+  userId                 String                 @map("user_id")
+  originalFilename       String                 @map("original_filename")
+  storagePath            String                 @map("storage_path")
+  mimeType               String                 @default("application/pdf") @map("mime_type")
+  fileSizeBytes          Int                    @map("file_size_bytes")
+  sha256                 String
+  latestRunId            String?                @map("latest_run_id")
+  latestSuccessfulRunId  String?                @map("latest_successful_run_id")
+  createdAt              DateTime               @default(now()) @map("created_at")
+  updatedAt              DateTime               @updatedAt @map("updated_at")
+  user                   User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  processingRuns         DocumentProcessingRun[]
+
+  @@index([userId])
+  @@map("documents")
+}
+
+model DocumentProcessingRun {
+  id              String            @id @default(cuid())
+  documentId      String            @map("document_id")
+  status          String            @default("queued")
+  failureStage    String?           @map("failure_stage")
+  failureMessage  String?           @map("failure_message")
+  parseModel      String?           @map("parse_model")
+  estimationModel String?           @map("estimation_model")
+  startedAt       DateTime?         @map("started_at")
+  finishedAt      DateTime?         @map("finished_at")
+  createdAt       DateTime          @default(now()) @map("created_at")
+  document        Document          @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  artifacts       DocumentArtifact[]
+
+  @@index([documentId])
+  @@index([status])
+  @@map("document_processing_runs")
+}
+
+model DocumentArtifact {
+  id              String                @id @default(cuid())
+  processingRunId String                @map("processing_run_id")
+  kind            String
+  markdown        String
+  metadataJson    String                @default("{}") @map("metadata_json")
+  createdAt       DateTime              @default(now()) @map("created_at")
+  processingRun   DocumentProcessingRun @relation(fields: [processingRunId], references: [id], onDelete: Cascade)
+
+  @@index([processingRunId])
+  @@index([kind])
+  @@map("document_artifacts")
+}
+
+model OAuthState {
+  id        String   @id @default(cuid())
+  state     String   @unique
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("oauth_states")
+}

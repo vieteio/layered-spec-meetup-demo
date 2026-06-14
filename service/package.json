@@ -1,0 +1,40 @@
+{
+  "name": "construction-drawing-estimation-service",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n next,ws -c blue,green \"next dev\" \"tsx src/server/wsStandalone.ts\"",
+    "build": "next build",
+    "start": "tsx server.ts",
+    "postinstall": "prisma generate",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:push": "prisma db push",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "packageManager": "yarn@4.12.0",
+  "dependencies": {
+    "@prisma/client": "^6.9.0",
+    "next": "^15.3.3",
+    "openai": "^4.104.0",
+    "pdf-lib": "^1.17.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "ws": "^8.18.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "@types/react": "^19.1.6",
+    "@types/react-dom": "^19.1.5",
+    "@types/ws": "^8.18.1",
+    "concurrently": "^9.1.2",
+    "prisma": "^6.9.0",
+    "puppeteer-core": "^25.1.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.3"
+  }
+}

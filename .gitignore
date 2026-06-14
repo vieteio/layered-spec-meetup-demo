@@ -9,4 +9,5 @@ __pycache__/
 .github/
 
 .next/
+.yarn/
 node_modules/

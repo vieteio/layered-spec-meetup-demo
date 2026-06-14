@@ -1,0 +1,9 @@
+node_modules/
+.next/
+storage/
+*.db
+*.db-journal
+test.db
+.env
+.env.local
+dist/
