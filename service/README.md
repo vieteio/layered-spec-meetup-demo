@@ -2,6 +2,14 @@
 
 Upload construction drawing PDFs, parse them into page-aware markdown, and generate time and cost estimations with live processing updates.
 
+This app was created with **layered-spec**. The creation process is preserved for review:
+
+- Screenshot: [`assets/screenshot.png`](../assets/screenshot.png)
+- Chat log: [`chats/`](../chats/)
+- Spec: [`specs/construction-drawing-pdf-estimation-service.md`](../specs/construction-drawing-pdf-estimation-service.md)
+
+![Estimation results UI](../assets/screenshot.png)
+
 ## Setup
 
 ```bash
