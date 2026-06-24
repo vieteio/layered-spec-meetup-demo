@@ -1,6 +1,12 @@
-# Construction Drawing Estimation — layered-spec example
+# Quick app development with layered-spec — demo
 
-This app was created with **layered-spec**: spec-first planning with an AI agent, then implementation driven from the workflow-bearing spec.
+This app was created with [**layered-spec**](https://github.com/vieteio/layered-spec): spec-programming skills, which makes AI development predictable.
+
+The full app was built from 5 messages in a chat with an AI agent.
+
+## App
+
+The demo app is a construction drawing estimation service.
 
 ![Estimation results UI](assets/screenshot.png)
 
@@ -8,7 +14,7 @@ The screenshot shows a completed document detail page with parsed and estimation
 
 ## Creation process
 
-The planning and implementation trail is kept in this folder so you can review how the app was built:
+The planning and implementation trail is kept in this repo so you can review how the app was built:
 
 - [`chats/`](chats/) — interactive session log with the AI agent
 - [`specs/`](specs/) — workflow-bearing spec that drove implementation
