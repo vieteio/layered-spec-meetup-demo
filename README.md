@@ -1,4 +1,4 @@
-# Quick app development with layered-spec — demo
+# App development with layered-spec demo
 
 This app was created with [**layered-spec**](https://github.com/vieteio/layered-spec): spec-programming skills, which makes AI development predictable.
 
